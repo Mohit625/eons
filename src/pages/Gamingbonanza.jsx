@@ -44,11 +44,10 @@ const Gamingbonanza = () => {
       const { data } = await supabase.auth.getSession();
       if (!data?.session) {
         // redirect to login and preserve current path
-        navigate('/login', { state: { from: location.pathname || "/events/gamingbonanza" } });
+        navigate('/login', { state: { from: `/events/gamingbonanza/register/${g.id}` } });
         return;
       }
-      setRegisterGame(g);
-      setRegisterOpen(true);
+      navigate(`/events/gamingbonanza/register/${g.id}`);
     } catch (err) {
       showToast("Auth check failed");
     }
