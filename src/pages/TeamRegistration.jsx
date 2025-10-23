@@ -77,8 +77,13 @@ const TeamRegistration = () => {
     if (!formData.teamLeaderName) return "Team leader name is required";
     if (!formData.teamLeaderContact) return "Team leader contact is required";
     if (!formData.alternateContact) return "Alternate contact is required";
+    if (!formData.playerInGameNames[0]) return "Team leader in-game name is required";
+    if (collegeType === "nits" && !formData.scholarIds[0]) {
+      return "Team leader scholar ID is required for NITS students";
+    }
 
-    for (let i = 0; i < playerCount; i++) {
+    // Validate remaining players (starting from Player 2)
+    for (let i = 1; i < playerCount; i++) {
       if (!formData.players[i]) return `Player ${i + 1} name is required`;
       if (!formData.playerInGameNames[i]) return `Player ${i + 1} in-game name is required`;
       if (collegeType === "nits" && !formData.scholarIds[i]) {
