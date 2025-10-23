@@ -19,6 +19,8 @@ import Login from "./pages/Login.jsx";
 import RequireAuth from "./auth/RequireAuth";
 import RequireAdmin from "./auth/RequireAdmin";
 import Gamingbonanza from "./pages/Gamingbonanza.jsx";
+import TeamRegistration from "./pages/TeamRegistration.jsx";
+import RegistrationConfirmation from "./pages/RegistrationConfirmation.jsx";
 
 const queryClient = new QueryClient();
 
