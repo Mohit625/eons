@@ -50,6 +50,11 @@ const Login = () => {
   }, [navigate, redirect]);
 
   const onLogin = async () => {
+    if (!isValidEmail(email)) {
+      const validation = getEmailValidationMessage(email);
+      return toast.error(validation.message);
+    }
+
     const { error, data } = await supabase.auth.signInWithPassword({ email, password });
     if (error) return toast.error(error.message);
 
