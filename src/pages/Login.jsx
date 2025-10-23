@@ -16,6 +16,33 @@ const Login = () => {
   const redirect = (location && location.state && location.state.from) ?? "/";
   const allowedEmail = import.meta.env.VITE_ADMIN_EMAIL;
 
+  // Email validation for NITS institute and external users
+  const isValidEmail = (emailValue) => {
+    const nitsEmailPattern = /^[a-zA-Z0-9_]+_ug_\d{2}@[a-zA-Z0-9]+\.nits\.ac\.in$/;
+    const generalEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return nitsEmailPattern.test(emailValue) || generalEmailPattern.test(emailValue);
+  };
+
+  const getEmailValidationMessage = (emailValue) => {
+    const nitsEmailPattern = /^[a-zA-Z0-9_]+_ug_\d{2}@[a-zA-Z0-9]+\.nits\.ac\.in$/;
+    const generalEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (nitsEmailPattern.test(emailValue)) {
+      return { valid: true, message: "NITS institute email" };
+    }
+
+    if (generalEmailPattern.test(emailValue)) {
+      return { valid: true, message: "External email" };
+    }
+
+    if (emailValue.includes("@nits.ac.in")) {
+      return { valid: false, message: 'Invalid NITS email format. Use: name_ug_year@branch.nits.ac.in' };
+    }
+
+    return { valid: false, message: "Invalid email format" };
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) navigate(redirect, { replace: true });
