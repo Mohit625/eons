@@ -19,6 +19,11 @@ const games = [
   { id: "valorant", name: "Valorant", image: valorantImg, brochure: "https://example.com/brochures/valorant" },
   { id: "ml", name: "Mobile Legends", image: mlImg, brochure: "https://example.com/brochures/ml" },
   { id: "freefire", name: "Free Fire", image: freefireImg, brochure: "https://example.com/brochures/freefire" },
+  { id: "csgo", name: "CS:GO", image: csgoImg, brochure: "https://example.com/brochures/csgo" },
+  { id: "fifa", name: "FIFA", image: placeholderImg, brochure: "https://example.com/brochures/fifa" },
+  { id: "bulletchoe", name: "Bullet Echo", image: placeholderImg, brochure: "https://example.com/brochures/bulletchoe" },
+  { id: "clashroyale", name: "Clash Royale", image: placeholderImg, brochure: "https://example.com/brochures/clashroyale" },
+  { id: "nfs", name: "NFS", image: placeholderImg, brochure: "https://example.com/brochures/nfs" },
 ];
 
 const Gamingbonanza = () => {
