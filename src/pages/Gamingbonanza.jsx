@@ -27,9 +27,6 @@ const games = [
 
 const Gamingbonanza = () => {
   const [toastMessage, setToastMessage] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [registerOpen, setRegisterOpen] = useState(false);
-  const [registerGame, setRegisterGame] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
