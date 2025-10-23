@@ -259,6 +259,7 @@ const TeamRegistration = () => {
                 <Input required value={formData.alternateContact} onChange={(e) => handleInputChange("alternateContact", e.target.value)} placeholder="10-digit number" />
               </div>
 
+              {/* Scholar ID only shows if collegeType is 'nits' */}
               {collegeType === "nits" && (
                 <div>
                   <Label>Team Leader Scholar ID *</Label>
@@ -270,7 +271,8 @@ const TeamRegistration = () => {
             {/* College Type */}
             <div className="space-y-4">
               <h3 className="font-orbitron text-lg font-semibold">College Type</h3>
-              <Select value={collegeType} onValueChange={setCollegeType}>
+              {/* This Select is now disabled and its value is controlled by the email input */}
+              <Select value={collegeType} disabled>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -311,6 +313,7 @@ const TeamRegistration = () => {
                         />
                       </div>
 
+                      {/* Scholar ID only shows if collegeType is 'nits' */}
                       {collegeType === "nits" && (
                         <div>
                           <Label className="text-xs">Scholar ID *</Label>
