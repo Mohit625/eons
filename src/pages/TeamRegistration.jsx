@@ -198,29 +198,41 @@ const TeamRegistration = () => {
               <h3 className="font-orbitron text-lg font-semibold">Basic Information</h3>
               
               <div>
-                <Label>Email ID</Label>
-                <Input type="email" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} placeholder="your@email.com" />
+                <Label>Email ID *</Label>
+                <Input required type="email" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} placeholder="your@email.com" />
               </div>
 
               <div>
-                <Label>Team Name</Label>
-                <Input value={formData.teamName} onChange={(e) => handleInputChange("teamName", e.target.value)} placeholder="Enter team name" />
+                <Label>Team Name *</Label>
+                <Input required value={formData.teamName} onChange={(e) => handleInputChange("teamName", e.target.value)} placeholder="Enter team name" />
               </div>
 
               <div>
-                <Label>Team Leader Name</Label>
-                <Input value={formData.teamLeaderName} onChange={(e) => handleInputChange("teamLeaderName", e.target.value)} placeholder="Leader name" />
+                <Label>Team Leader / Player 1 Name *</Label>
+                <Input required value={formData.teamLeaderName} onChange={(e) => handleInputChange("teamLeaderName", e.target.value)} placeholder="Leader name" />
               </div>
 
               <div>
-                <Label>Team Leader Contact (WhatsApp)</Label>
-                <Input value={formData.teamLeaderContact} onChange={(e) => handleInputChange("teamLeaderContact", e.target.value)} placeholder="10-digit number" />
+                <Label>Team Leader In-Game Name ({gameInfo.name} #Tagline) *</Label>
+                <Input required value={formData.playerInGameNames[0] || ""} onChange={(e) => handlePlayerChange(0, "inGameName", e.target.value)} placeholder="In-game name with tagline" />
               </div>
 
               <div>
-                <Label>Alternate Contact (WhatsApp)</Label>
-                <Input value={formData.alternateContact} onChange={(e) => handleInputChange("alternateContact", e.target.value)} placeholder="10-digit number" />
+                <Label>Team Leader Contact (WhatsApp) *</Label>
+                <Input required value={formData.teamLeaderContact} onChange={(e) => handleInputChange("teamLeaderContact", e.target.value)} placeholder="10-digit number" />
               </div>
+
+              <div>
+                <Label>Alternate Contact (WhatsApp) *</Label>
+                <Input required value={formData.alternateContact} onChange={(e) => handleInputChange("alternateContact", e.target.value)} placeholder="10-digit number" />
+              </div>
+
+              {collegeType === "nits" && (
+                <div>
+                  <Label>Team Leader Scholar ID *</Label>
+                  <Input required value={formData.scholarIds[0] || ""} onChange={(e) => handlePlayerChange(0, "scholarId", e.target.value)} placeholder="Scholar ID" />
+                </div>
+              )}
             </div>
 
             {/* College Type */}
