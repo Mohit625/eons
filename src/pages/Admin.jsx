@@ -121,7 +121,7 @@ const Admin = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="flex gap-2">
-                      <Link to={`/events/${e.id}/leaderboard`}>
+                      <Link to={`/events/${e.id}`}>
                         <Button className="font-orbitron">Manage</Button>
                       </Link>
                       <Link to={`/events/${e.id}`}>
