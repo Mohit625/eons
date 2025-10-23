@@ -76,11 +76,8 @@ const Navigation = () => {
                 <Link to="/admin">Dashboard</Link>
               </Button>
             ) : (
-              // Regular user signed in: show email and logout
-              <>
-                <div className="px-2 text-sm hidden sm:block">{user.email}</div>
-                <Button variant="outline" onClick={handleLogout}>Logout</Button>
-              </>
+              // Regular user signed in: show logout only
+              <Button variant="outline" onClick={handleLogout}>Logout</Button>
             )}
           </div>
 
