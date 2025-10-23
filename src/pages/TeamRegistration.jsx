@@ -94,13 +94,15 @@ const TeamRegistration = () => {
   };
 
   const validateForm = () => {
+    const emailIsNits = isNitsEmail(formData.email);
+
     if (!formData.email) return "Email is required";
     if (!formData.teamName) return "Team name is required";
     if (!formData.teamLeaderName) return "Team leader name is required";
     if (!formData.teamLeaderContact) return "Team leader contact is required";
     if (!formData.alternateContact) return "Alternate contact is required";
     if (!formData.playerInGameNames[0]) return "Team leader in-game name is required";
-    if (collegeType === "nits" && !formData.scholarIds[0]) {
+    if (emailIsNits && !formData.scholarIds[0]) {
       return "Team leader scholar ID is required for NITS students";
     }
 
@@ -108,7 +110,7 @@ const TeamRegistration = () => {
     for (let i = 1; i < playerCount; i++) {
       if (!formData.players[i]) return `Player ${i + 1} name is required`;
       if (!formData.playerInGameNames[i]) return `Player ${i + 1} in-game name is required`;
-      if (collegeType === "nits" && !formData.scholarIds[i]) {
+      if (emailIsNits && !formData.scholarIds[i]) {
         return `Player ${i + 1} scholar ID is required for NITS students`;
       }
     }
