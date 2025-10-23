@@ -104,6 +104,13 @@ const Login = () => {
             <div className="space-y-2">
               <Label>Email</Label>
               <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
+              <p className="text-xs text-muted-foreground">
+                {email && getEmailValidationMessage(email).valid ? (
+                  <span className="text-green-500">✓ {getEmailValidationMessage(email).message}</span>
+                ) : (
+                  <span>NITS: name_ug_year@branch.nits.ac.in | External: any email</span>
+                )}
+              </p>
             </div>
             <div className="space-y-2">
               <Label>Password</Label>
