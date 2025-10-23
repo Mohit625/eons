@@ -131,7 +131,7 @@ const Login = () => {
             </div>
             <div className="flex gap-2">
               <Button className="w-full" onClick={onLogin}>{role === 'admin' ? 'Login as Admin' : 'Login'}</Button>
-              <Button variant="outline" className="w-full" onClick={onRegister} disabled={role === 'admin'}>{role === 'admin' ? 'Register Disabled' : 'Register'}</Button>
+              <Button variant="outline" className="w-full" onClick={onRegister} disabled={role === 'admin'}>{role === 'admin' ? 'Disabled' : 'Sign Up'}</Button>
             </div>
             {role === 'admin' && (
               <p className="text-xs text-muted-foreground">Admin login requires the account set in VITE_ADMIN_EMAIL.</p>
