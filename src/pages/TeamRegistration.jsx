@@ -249,44 +249,52 @@ const TeamRegistration = () => {
               </Select>
             </div>
 
-            {/* Players Info */}
-            <div className="space-y-4">
-              <h3 className="font-orbitron text-lg font-semibold">Player Information</h3>
-              {Array.from({ length: playerCount }).map((_, i) => (
-                <div key={i} className="border border-border/30 rounded-lg p-4 space-y-3">
-                  <h4 className="font-semibold text-sm">Player {i + 1}</h4>
-                  
-                  <div>
-                    <Label className="text-xs">Player {i + 1} Name</Label>
-                    <Input
-                      value={formData.players[i] || ""}
-                      onChange={(e) => handlePlayerChange(i, "name", e.target.value)}
-                      placeholder="Player name"
-                    />
-                  </div>
+            {/* Players Info - Starting from Player 2 */}
+            {playerCount > 1 && (
+              <div className="space-y-4">
+                <h3 className="font-orbitron text-lg font-semibold">Additional Players</h3>
+                {Array.from({ length: playerCount - 1 }).map((_, i) => {
+                  const playerIndex = i + 1;
+                  return (
+                    <div key={playerIndex} className="border border-border/30 rounded-lg p-4 space-y-3">
+                      <h4 className="font-semibold text-sm">Player {playerIndex + 1}</h4>
 
-                  <div>
-                    <Label className="text-xs">In-Game Name ({gameInfo.name} #Tagline)</Label>
-                    <Input
-                      value={formData.playerInGameNames[i] || ""}
-                      onChange={(e) => handlePlayerChange(i, "inGameName", e.target.value)}
-                      placeholder="In-game name with tagline"
-                    />
-                  </div>
+                      <div>
+                        <Label className="text-xs">Player {playerIndex + 1} Name *</Label>
+                        <Input
+                          required
+                          value={formData.players[playerIndex] || ""}
+                          onChange={(e) => handlePlayerChange(playerIndex, "name", e.target.value)}
+                          placeholder="Player name"
+                        />
+                      </div>
 
-                  {collegeType === "nits" && (
-                    <div>
-                      <Label className="text-xs">Scholar ID</Label>
-                      <Input
-                        value={formData.scholarIds[i] || ""}
-                        onChange={(e) => handlePlayerChange(i, "scholarId", e.target.value)}
-                        placeholder="Scholar ID"
-                      />
+                      <div>
+                        <Label className="text-xs">In-Game Name ({gameInfo.name} #Tagline) *</Label>
+                        <Input
+                          required
+                          value={formData.playerInGameNames[playerIndex] || ""}
+                          onChange={(e) => handlePlayerChange(playerIndex, "inGameName", e.target.value)}
+                          placeholder="In-game name with tagline"
+                        />
+                      </div>
+
+                      {collegeType === "nits" && (
+                        <div>
+                          <Label className="text-xs">Scholar ID *</Label>
+                          <Input
+                            required
+                            value={formData.scholarIds[playerIndex] || ""}
+                            onChange={(e) => handlePlayerChange(playerIndex, "scholarId", e.target.value)}
+                            placeholder="Scholar ID"
+                          />
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Price and Submit */}
             <div className="space-y-4 pt-4 border-t border-border/30">
