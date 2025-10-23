@@ -291,7 +291,7 @@ const EventLeaderboard = () => {
         {!gameId ? (
           // This is the "Select a Game" grid
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {event.games.map((game) => (
+            {Array.isArray(event.games) && event.games.map((game) => (
               <div
                 key={game.id}
                 className="group cursor-pointer rounded-xl bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 p-[1px] transition-transform hover:scale-[1.01]"
