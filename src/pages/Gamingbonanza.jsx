@@ -12,11 +12,11 @@ import RegisterTeamDialog from "@/components/RegisterTeamDialog.jsx";
 import { supabase } from "@/lib/supabase.js";
 
 const games = [
-  { id: "bgmi", name: "BGMI", image: bgmiImg },
-  { id: "codm", name: "COD Mobile", image: codImg },
-  { id: "valorant", name: "Valorant", image: valorantImg },
-  { id: "ml", name: "Mobile Legends", image: mlImg },
-  { id: "freefire", name: "Free Fire", image: freefireImg },
+  { id: "bgmi", name: "BGMI", image: bgmiImg, brochure: "https://example.com/brochures/bgmi" },
+  { id: "codm", name: "COD Mobile", image: codImg, brochure: "https://example.com/brochures/codm" },
+  { id: "valorant", name: "Valorant", image: valorantImg, brochure: "https://example.com/brochures/valorant" },
+  { id: "ml", name: "Mobile Legends", image: mlImg, brochure: "https://example.com/brochures/ml" },
+  { id: "freefire", name: "Free Fire", image: freefireImg, brochure: "https://example.com/brochures/freefire" },
 ];
 
 const Gamingbonanza = () => {
