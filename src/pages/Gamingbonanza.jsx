@@ -111,8 +111,6 @@ const Gamingbonanza = () => {
           {toastMessage}
         </div>
       )}
-
-      <RegisterTeamDialog open={registerOpen} onOpenChange={setRegisterOpen} game={registerGame} />
     </div>
   );
 };
