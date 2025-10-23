@@ -70,6 +70,15 @@ const TeamRegistration = () => {
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+
+    // Auto-set college type based on email
+    if (field === "email") {
+      if (!isNitsEmail(value)) {
+        setCollegeType("other");
+      } else {
+        setCollegeType("nits");
+      }
+    }
   };
 
   const handlePlayerChange = (index, field, value) => {
