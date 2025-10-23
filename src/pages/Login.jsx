@@ -137,7 +137,7 @@ const Login = () => {
               <p className="text-xs text-muted-foreground">Admin login requires the account set in VITE_ADMIN_EMAIL.</p>
             )}
             {role === 'user' && (
-              <p className="text-xs text-muted-foreground">Use your email and password. New here? Click Register.</p>
+              <p className="text-xs text-muted-foreground">Use your email and password. New here? Click Register to create an account and sign in instantly.</p>
             )}
           </CardContent>
         </Card>
