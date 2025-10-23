@@ -103,6 +103,9 @@ const TeamRegistration = () => {
     setLoading(true);
 
     try {
+      // Set Player 1 as team leader
+      const allPlayers = [formData.teamLeaderName, ...formData.players.slice(1)];
+
       const registrationData = {
         event_id: eventId,
         game_id: gameId,
@@ -112,7 +115,7 @@ const TeamRegistration = () => {
         team_leader_contact: formData.teamLeaderContact,
         alternate_contact: formData.alternateContact,
         college_type: collegeType,
-        players: formData.players,
+        players: allPlayers,
         player_in_game_names: formData.playerInGameNames,
         scholar_ids: collegeType === "nits" ? formData.scholarIds : [],
         amount: price,
