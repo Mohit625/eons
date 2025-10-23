@@ -19,6 +19,8 @@ import Login from "./pages/Login.jsx";
 import RequireAuth from "./auth/RequireAuth";
 import RequireAdmin from "./auth/RequireAdmin";
 import Gamingbonanza from "./pages/Gamingbonanza.jsx";
+import TeamRegistration from "./pages/TeamRegistration.jsx";
+import RegistrationConfirmation from "./pages/RegistrationConfirmation.jsx";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,8 @@ function MainRoutes() {
         <Route path="/members" element={<Members />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/events/:eventId/register/:gameId" element={<RequireAuth><TeamRegistration /></RequireAuth>} />
+        <Route path="/registration-confirmation/:registrationId" element={<RequireAuth><RegistrationConfirmation /></RequireAuth>} />
         <Route path="/admin" element={<RequireAdmin><Admin /></RequireAdmin>} />
         <Route path="*" element={<NotFound />} />
       </Routes>

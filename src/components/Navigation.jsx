@@ -76,11 +76,8 @@ const Navigation = () => {
                 <Link to="/admin">Dashboard</Link>
               </Button>
             ) : (
-              // Regular user signed in: show email and logout
-              <>
-                <div className="px-2 text-sm hidden sm:block">{user.email}</div>
-                <Button variant="outline" onClick={handleLogout}>Logout</Button>
-              </>
+              // Regular user signed in: show logout only
+              <Button variant="outline" onClick={handleLogout}>Logout</Button>
             )}
           </div>
 
@@ -114,10 +111,7 @@ const Navigation = () => {
                   <Link to="/admin" onClick={() => setIsOpen(false)}>Dashboard</Link>
                 </Button>
               ) : (
-                <>
-                  <div className="px-2 text-sm">{user.email}</div>
-                  <Button className="w-full" onClick={() => { setIsOpen(false); handleLogout(); }}>Logout</Button>
-                </>
+                <Button className="w-full" onClick={() => { setIsOpen(false); handleLogout(); }}>Logout</Button>
               )}
             </div>
           </div>

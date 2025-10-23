@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import valorantImg from "@/assets/valorant.jpg";
@@ -7,23 +7,25 @@ import bgmiImg from "@/assets/bgmi.jpg";
 import codImg from "@/assets/cod.jpg";
 import mlImg from "@/assets/ml.jpg";
 import freefireImg from "@/assets/freefire.jpg";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import RegisterTeamDialog from "@/components/RegisterTeamDialog.jsx";
+import csgoImg from "@/assets/cs-go.jpg";
+import placeholderImg from "@/assets/event-placeholder.jpg";
 import { supabase } from "@/lib/supabase.js";
 
 const games = [
-  { id: "bgmi", name: "BGMI", image: bgmiImg },
-  { id: "codm", name: "COD Mobile", image: codImg },
-  { id: "valorant", name: "Valorant", image: valorantImg },
-  { id: "ml", name: "Mobile Legends", image: mlImg },
-  { id: "freefire", name: "Free Fire", image: freefireImg },
+  { id: "bgmi", name: "BGMI", image: bgmiImg, brochure: "https://example.com/brochures/bgmi" },
+  { id: "codm", name: "COD Mobile", image: codImg, brochure: "https://example.com/brochures/codm" },
+  { id: "valorant", name: "Valorant", image: valorantImg, brochure: "https://example.com/brochures/valorant" },
+  { id: "ml", name: "Mobile Legends", image: mlImg, brochure: "https://example.com/brochures/ml" },
+  { id: "freefire", name: "Free Fire", image: freefireImg, brochure: "https://example.com/brochures/freefire" },
+  { id: "csgo", name: "CS:GO", image: csgoImg, brochure: "https://example.com/brochures/csgo" },
+  { id: "fifa", name: "FIFA", image: placeholderImg, brochure: "https://example.com/brochures/fifa" },
+  { id: "bulletchoe", name: "Bullet Echo", image: placeholderImg, brochure: "https://example.com/brochures/bulletchoe" },
+  { id: "clashroyale", name: "Clash Royale", image: placeholderImg, brochure: "https://example.com/brochures/clashroyale" },
+  { id: "nfs", name: "NFS", image: placeholderImg, brochure: "https://example.com/brochures/nfs" },
 ];
 
 const Gamingbonanza = () => {
   const [toastMessage, setToastMessage] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [registerOpen, setRegisterOpen] = useState(false);
-  const [registerGame, setRegisterGame] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -37,11 +39,10 @@ const Gamingbonanza = () => {
       const { data } = await supabase.auth.getSession();
       if (!data?.session) {
         // redirect to login and preserve current path
-        navigate('/login', { state: { from: location.pathname || "/events/gamingbonanza" } });
+        navigate('/login', { state: { from: `/events/gamingbonanza/register/${g.id}` } });
         return;
       }
-      setRegisterGame(g);
-      setRegisterOpen(true);
+      navigate(`/events/gamingbonanza/register/${g.id}`);
     } catch (err) {
       showToast("Auth check failed");
     }
@@ -88,41 +89,14 @@ const Gamingbonanza = () => {
               </CardHeader>
               <CardContent>
                 <div>
-                  <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                    <DialogContent className="sm:max-w-md">
-                      <DialogHeader>
-                        <DialogTitle className="font-orbitron text-center">Coming Soon!</DialogTitle>
-                      </DialogHeader>
-                      <div className="py-4 text-center text-muted-foreground">
-                        <p>The leaderboard for this game is not prepared yet. Please check back later.</p>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                  {g.id === 'bgmi' || g.id === 'freefire' || g.id === 'ml' || g.id === 'codm' ? (
-                    <>
-                      <Link to={`/events/gamingbonanza/leaderboard/${g.id}`}>
-                        <Button variant="outline" className="w-full font-orbitron mb-2">
-                          View Leaderboard
-                        </Button>
-                      </Link>
-                      <Button className="w-full font-orbitron" onClick={() => handleRegisterClick(g)}>
-                        Register Team
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button
-                        variant="outline"
-                        className="w-full font-orbitron mb-2"
-                        onClick={() => setIsModalOpen(true)}
-                      >
-                        View Leaderboard
-                      </Button>
-                      <Button className="w-full font-orbitron" onClick={() => handleRegisterClick(g)}>
-                        Register Team
-                      </Button>
-                    </>
-                  )}
+                  <a href={g.brochure} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="w-full font-orbitron mb-2">
+                      View Details
+                    </Button>
+                  </a>
+                  <Button className="w-full font-orbitron" onClick={() => handleRegisterClick(g)}>
+                    Register Team
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -136,8 +110,6 @@ const Gamingbonanza = () => {
           {toastMessage}
         </div>
       )}
-
-      <RegisterTeamDialog open={registerOpen} onOpenChange={setRegisterOpen} game={registerGame} />
     </div>
   );
 };

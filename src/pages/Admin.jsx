@@ -19,6 +19,31 @@ const Admin = () => {
   const currentGame = useMemo(() => (currentEvent?.games ? currentEvent.games.find((g) => g.id === gameId) : undefined) ?? currentEvent?.games?.[0], [currentEvent, gameId]);
   const [rows, setRows] = useState(() => currentGame?.rankings ?? []);
 
+  const exportJSON = async () => {
+    const data = JSON.stringify(listEvents(), null, 2);
+    try {
+      await navigator.clipboard.writeText(data);
+      toast.success("Exported to clipboard");
+    } catch {
+      toast.message("Copy failed, showing modal");
+      alert(data);
+    }
+  };
+
+  const importJSON = () => {
+    const text = prompt("Paste events JSON");
+    if (!text) return;
+    try {
+      const parsed = JSON.parse(text);
+      replaceAllEvents(parsed);
+      setEvents(onlyUpcoming(listEvents()));
+      onEventChange(events?.[0]?.id ?? "");
+      toast.success("Imported events data");
+    } catch {
+      toast.error("Invalid JSON");
+    }
+  };
+
   // If there are no events configured, show a helpful message to the admin
   if (!Array.isArray(events) || events.length === 0) {
     return (
@@ -67,31 +92,6 @@ const Admin = () => {
     toast.success("Leaderboard saved");
   };
 
-  const exportJSON = async () => {
-    const data = JSON.stringify(listEvents(), null, 2);
-    try {
-      await navigator.clipboard.writeText(data);
-      toast.success("Exported to clipboard");
-    } catch {
-      toast.message("Copy failed, showing modal");
-      alert(data);
-    }
-  };
-
-  const importJSON = () => {
-    const text = prompt("Paste events JSON");
-    if (!text) return;
-    try {
-      const parsed = JSON.parse(text);
-      replaceAllEvents(parsed);
-      setEvents(onlyUpcoming(listEvents()));
-      onEventChange(events?.[0]?.id ?? "");
-      toast.success("Imported events data");
-    } catch {
-      toast.error("Invalid JSON");
-    }
-  };
-
   return (
     <div className="min-h-screen pt-24 pb-12">
       <div className="container mx-auto px-4 space-y-6">
@@ -121,7 +121,7 @@ const Admin = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="flex gap-2">
-                      <Link to={`/events/${e.id}/leaderboard`}>
+                      <Link to={`/events/${e.id}`}>
                         <Button className="font-orbitron">Manage</Button>
                       </Link>
                       <Link to={`/events/${e.id}`}>
