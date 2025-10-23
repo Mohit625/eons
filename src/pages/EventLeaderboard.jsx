@@ -156,7 +156,7 @@ const EventLeaderboard = () => {
   const event = baseEvent ?? mockEvents[eventId];
 
   const selectedGame = useMemo(() => {
-    if (!event) return undefined;
+    if (!event || !Array.isArray(event.games)) return undefined;
     return gameId ? event.games.find((g) => g.id === gameId) : undefined;
   }, [event, gameId]);
 
