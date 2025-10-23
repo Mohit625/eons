@@ -27,11 +27,24 @@ const TeamRegistration = () => {
     scholarIds: [],
   });
 
+  // Check if email is NITS student
+  const isNitsEmail = (email) => {
+    const nitsEmailPattern = /^[a-zA-Z0-9_]+_ug_\d{2}@[a-zA-Z0-9]+\.nits\.ac\.in$/;
+    return nitsEmailPattern.test(email);
+  };
+
   useEffect(() => {
     const initializeForm = async () => {
       const { data: sessionData } = await supabase.auth.getSession();
       if (sessionData?.session?.user?.email) {
-        setFormData((prev) => ({ ...prev, email: sessionData.session.user.email }));
+        const userEmail = sessionData.session.user.email;
+        setFormData((prev) => ({ ...prev, email: userEmail }));
+        // Auto-set college type based on email
+        if (!isNitsEmail(userEmail)) {
+          setCollegeType("other");
+        } else {
+          setCollegeType("nits");
+        }
       }
     };
     initializeForm();
