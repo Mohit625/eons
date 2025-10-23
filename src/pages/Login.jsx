@@ -83,9 +83,22 @@ const Login = () => {
       return toast.error(validation.message);
     }
 
-    const { error } = await supabase.auth.signUp({ email, password });
-    if (error) return toast.error(error.message);
-    toast.success("Registered. Check your email to confirm.");
+    if (!password || password.length < 6) {
+      return toast.error("Password must be at least 6 characters");
+    }
+
+    const { error: signUpError } = await supabase.auth.signUp({ email, password });
+    if (signUpError) return toast.error(signUpError.message);
+
+    // Automatically sign in after registration
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    if (signInError) {
+      toast.error("Registration successful, but auto-login failed. Please sign in manually.");
+      return;
+    }
+
+    toast.success("Welcome!");
+    navigate(redirect, { replace: true });
   };
 
   return (
