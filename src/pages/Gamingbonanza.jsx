@@ -7,6 +7,8 @@ import bgmiImg from "@/assets/bgmi.jpg";
 import codImg from "@/assets/cod.jpg";
 import mlImg from "@/assets/ml.jpg";
 import freefireImg from "@/assets/freefire.jpg";
+import csgoImg from "@/assets/cs-go.jpg";
+import placeholderImg from "@/assets/event-placeholder.jpg";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import RegisterTeamDialog from "@/components/RegisterTeamDialog.jsx";
 import { supabase } from "@/lib/supabase.js";
