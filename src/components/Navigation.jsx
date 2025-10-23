@@ -111,10 +111,7 @@ const Navigation = () => {
                   <Link to="/admin" onClick={() => setIsOpen(false)}>Dashboard</Link>
                 </Button>
               ) : (
-                <>
-                  <div className="px-2 text-sm">{user.email}</div>
-                  <Button className="w-full" onClick={() => { setIsOpen(false); handleLogout(); }}>Logout</Button>
-                </>
+                <Button className="w-full" onClick={() => { setIsOpen(false); handleLogout(); }}>Logout</Button>
               )}
             </div>
           </div>
