@@ -88,41 +88,14 @@ const Gamingbonanza = () => {
               </CardHeader>
               <CardContent>
                 <div>
-                  <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                    <DialogContent className="sm:max-w-md">
-                      <DialogHeader>
-                        <DialogTitle className="font-orbitron text-center">Coming Soon!</DialogTitle>
-                      </DialogHeader>
-                      <div className="py-4 text-center text-muted-foreground">
-                        <p>The leaderboard for this game is not prepared yet. Please check back later.</p>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                  {g.id === 'bgmi' || g.id === 'freefire' || g.id === 'ml' || g.id === 'codm' ? (
-                    <>
-                      <Link to={`/events/gamingbonanza/leaderboard/${g.id}`}>
-                        <Button variant="outline" className="w-full font-orbitron mb-2">
-                          View Leaderboard
-                        </Button>
-                      </Link>
-                      <Button className="w-full font-orbitron" onClick={() => handleRegisterClick(g)}>
-                        Register Team
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button
-                        variant="outline"
-                        className="w-full font-orbitron mb-2"
-                        onClick={() => setIsModalOpen(true)}
-                      >
-                        View Leaderboard
-                      </Button>
-                      <Button className="w-full font-orbitron" onClick={() => handleRegisterClick(g)}>
-                        Register Team
-                      </Button>
-                    </>
-                  )}
+                  <a href={g.brochure} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="w-full font-orbitron mb-2">
+                      View Details
+                    </Button>
+                  </a>
+                  <Button className="w-full font-orbitron" onClick={() => handleRegisterClick(g)}>
+                    Register Team
+                  </Button>
                 </div>
               </CardContent>
             </Card>
