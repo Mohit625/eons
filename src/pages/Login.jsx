@@ -77,6 +77,12 @@ const Login = () => {
 
   const onRegister = async () => {
     if (role === "admin") return toast.error("Admin registration not allowed");
+
+    if (!isValidEmail(email)) {
+      const validation = getEmailValidationMessage(email);
+      return toast.error(validation.message);
+    }
+
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) return toast.error(error.message);
     toast.success("Registered. Check your email to confirm.");
